@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/fragments/template}">
+
+<th:block layout:fragment=" page-head">
+    <title>inicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet"/>
+</th:block>
+<div layout:fragment="page-content">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Contactos</h1>
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <a th:href="@{/save/0}" class="btn btn-info"> Agregar</a>
+
+            </div>
+        </div>
+
+        <br>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                detalle
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Dirección</th>
+
+                        <th>Telefono movil</th>
+                        <th>Telefono fijo</th>
+                        <th>Otro telefono</th>
+                        <th>Correo</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Dirección</th>
+                        <th>Telefono movil</th>
+                        <th>Telefono fijo</th>
+                        <th>Otro telefono</th>
+                        <th>Correo</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <!--/*@thymesVar id="contactos" type="com.tpi.crud.entity.Contacto"*/-->
+                    <tr th:each="contactos: ${listaContactos}">
+                        <td th:text="${contactos.id}"></td>
+                        <td th:text="${contactos.nombre}"></td>
+                        <td th:text="${contactos.direccion}"></td>
+                        <td th:text="${contactos.telefono}"></td>
+                        <td th:text="${contactos.telefonoCasa}"></td>
+                        <td th:text="${contactos.otroTelefono}"></td>
+                        <td th:text="${contactos.correo}"></td>
+                        <td>
+                            <a class="btn btn-info" th:href="@{/save/{id} (id = ${contactos.id})}">Editar</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" th:href="@{/delete/{id} (id = ${contactos.id})}">Eliminar</a>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="page-scripts">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script th:src="@{/assets/demo/chart-area-demo.js}"></script>
+    <script th:src="@{assets/demo/chart-bar-demo.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    <script th:src="@{/js/datatables-simple-demo.js}"></script>
+</th:block>
+</html>
